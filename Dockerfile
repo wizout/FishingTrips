@@ -8,9 +8,9 @@ RUN dotnet publish "src/FishingTrips.Api/FishingTrips.Api.csproj" -c Release -o 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
-ENV ASPNETCORE_URLS=http://+:8080
 ENV ConnectionStrings__Default="Data Source=/data/fishingtrips.db"
 RUN mkdir -p /data
 VOLUME ["/data"]
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "FishingTrips.Api.dll"]
+# Honour $PORT if hosting platform sets it (Render, Fly), else default 8080.
+ENTRYPOINT ["/bin/sh", "-c", "ASPNETCORE_URLS=http://+:${PORT:-8080} exec dotnet FishingTrips.Api.dll"]
