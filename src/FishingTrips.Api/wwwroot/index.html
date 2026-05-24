@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishingTrips — записи на рибалку</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 12c4-6 10-6 14 0 4-6 6-4 6 0s-2 6-6 0c-4 6-10 6-14 0z"/>
+                <circle cx="18" cy="10" r="1" fill="currentColor"/>
+            </svg>
+            <span>FishingTrips</span>
+        </div>
+        <nav class="tabs">
+            <button class="tab active" data-tab="trips">Виїзди</button>
+            <button class="tab" data-tab="waterbodies">Водойми</button>
+            <button class="tab" data-tab="guides">Гіди</button>
+            <button class="tab" data-tab="anglers">Рибалки</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- TRIPS -->
+        <section id="trips" class="panel active">
+            <div class="panel-head">
+                <h2>Виїзди на рибалку</h2>
+                <button class="btn primary" id="btn-new-trip">+ Новий виїзд</button>
+            </div>
+            <div class="filters">
+                <select id="filter-waterbody"><option value="">Усі водойми</option></select>
+                <select id="filter-guide"><option value="">Усі гіди</option></select>
+                <select id="filter-status">
+                    <option value="">Усі статуси</option>
+                    <option value="Planned">Заплановані</option>
+                    <option value="Ongoing">У процесі</option>
+                    <option value="Completed">Завершені</option>
+                    <option value="Cancelled">Скасовані</option>
+                </select>
+                <button class="btn" id="btn-clear-filters">Скинути</button>
+            </div>
+            <div id="trips-list" class="cards"></div>
+        </section>
+
+        <!-- WATERBODIES -->
+        <section id="waterbodies" class="panel">
+            <div class="panel-head">
+                <h2>Водойми</h2>
+                <button class="btn primary" id="btn-new-waterbody">+ Додати</button>
+            </div>
+            <div id="waterbodies-list" class="table-wrap"></div>
+        </section>
+
+        <!-- GUIDES -->
+        <section id="guides" class="panel">
+            <div class="panel-head">
+                <h2>Гіди-інструктори</h2>
+                <button class="btn primary" id="btn-new-guide">+ Додати</button>
+            </div>
+            <div id="guides-list" class="table-wrap"></div>
+        </section>
+
+        <!-- ANGLERS -->
+        <section id="anglers" class="panel">
+            <div class="panel-head">
+                <h2>Рибалки</h2>
+                <button class="btn primary" id="btn-new-angler">+ Додати</button>
+            </div>
+            <div id="anglers-list" class="table-wrap"></div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-backdrop" id="modal-backdrop">
+        <div class="modal" id="modal">
+            <header><h3 id="modal-title">—</h3><button class="modal-close" id="modal-close">×</button></header>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <div class="toasts" id="toasts"></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

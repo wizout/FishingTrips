@@ -1,0 +1,70 @@
+@startuml FishingTrips Use Case Diagram
+left to right direction
+skinparam packageStyle rectangle
+skinparam actor {
+    BackgroundColor #E8F4F8
+    BorderColor #2C5F77
+}
+skinparam usecase {
+    BackgroundColor #FFF8E1
+    BorderColor #B8860B
+}
+
+title Use-case діаграма: Сервіс записів на рибалку
+
+actor "Гість" as Guest
+actor "Рибалка\n(Angler)" as Angler
+actor "Гід\n(Guide)" as Guide
+actor "Адмін" as Admin
+
+Guest <|-- Angler
+Guest <|-- Guide
+Guest <|-- Admin
+
+rectangle "FishingTrips API" {
+    usecase "Реєстрація" as UC_Register
+    usecase "Логін" as UC_Login
+    usecase "Перегляд виїздів" as UC_ViewTrips
+    usecase "Фільтрувати\nза водоймою/датою" as UC_Filter
+    usecase "Перегляд деталей\nвиїзду" as UC_TripDetails
+
+    usecase "Забронювати участь" as UC_Book
+    usecase "Перевірити\nвільні місця" as UC_CheckSlots
+    usecase "Скасувати\nбронювання" as UC_Cancel
+    usecase "Переглянути\nсвою історію" as UC_History
+
+    usecase "Створити виїзд" as UC_CreateTrip
+    usecase "Прив'язати\nводойму та гіда" as UC_AssignWB
+    usecase "Завершити виїзд" as UC_Complete
+    usecase "Додати звіт\nпро улов" as UC_Catch
+
+    usecase "CRUD водойм" as UC_CRUDWaterbodies
+    usecase "CRUD гідів" as UC_CRUDGuides
+    usecase "Перегляд статистики" as UC_Stats
+}
+
+Guest --> UC_Register
+Guest --> UC_Login
+Guest --> UC_ViewTrips
+
+Angler --> UC_ViewTrips
+Angler --> UC_Book
+Angler --> UC_Cancel
+Angler --> UC_History
+Angler --> UC_TripDetails
+
+Guide --> UC_CreateTrip
+Guide --> UC_Complete
+Guide --> UC_ViewTrips
+
+Admin --> UC_CRUDWaterbodies
+Admin --> UC_CRUDGuides
+Admin --> UC_Stats
+Admin --> UC_CreateTrip
+
+UC_ViewTrips ..> UC_Filter : <<extend>>
+UC_Book ..> UC_CheckSlots : <<include>>
+UC_CreateTrip ..> UC_AssignWB : <<include>>
+UC_Complete ..> UC_Catch : <<extend>>
+
+@enduml

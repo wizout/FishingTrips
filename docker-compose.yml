@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    container_name: fishingtrips-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - fishingtrips-data:/data
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+volumes:
+  fishingtrips-data:
